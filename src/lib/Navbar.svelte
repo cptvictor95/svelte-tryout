@@ -1,5 +1,11 @@
 <script>
   let name = "Victor";
+  $: isOpen = false;
+
+  function toggleNavbar() {
+    console.log("TOGGLE", isOpen)
+    isOpen = !isOpen;
+  }
 </script>
 
 <header class="absolute inset-x-0 top-0 z-50">
@@ -12,15 +18,14 @@
     </div>
 
     <div class="flex lg:hidden">
-      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">
+      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5" on:click={toggleNavbar}>
         <span class="sr-only">Open main menu</span>
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
-
-    <div class="hidden lg:flex lg:gap-x-12">
+<div class="hidden lg:flex lg:gap-x-12">
       <a href="/" class="text-sm font-semibold leading-6">Home</a>
       <a href="atum" class="text-sm font-semibold leading-6">Atum</a>
       <a href="sazon" class="text-sm font-semibold leading-6">Sazon</a>
@@ -31,6 +36,7 @@
     </div>
   </nav>
 
+  {#if isOpen}
   <!-- Mobile menu, show/hide based on menu open state. -->
   <div class="lg:hidden" role="dialog" aria-modal="true">
     <!-- Background backdrop, show/hide based on slide-over state. -->
@@ -43,7 +49,7 @@
           <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
         </a>
 
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" on:click={toggleNavbar}>
           <span class="sr-only">Close menu</span>
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -58,7 +64,7 @@
             <a href="atum" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-700">Atum</a>
             <a href="sazon" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-700">Sazon</a>
           </div>
-          
+
           <div class="py-6">
             <a href="login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-700">Log in</a>
           </div>
@@ -66,4 +72,5 @@
       </div>
     </div>
   </div>
+  {/if}
 </header>
